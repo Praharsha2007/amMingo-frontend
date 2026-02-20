@@ -1,2 +1,1 @@
-# amMingo-frontend
-Open source alternative to Human Bingo
+# amMingo-frontend Open source alternative to Human Bingo
