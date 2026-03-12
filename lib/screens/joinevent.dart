@@ -72,25 +72,30 @@ class _JoinEventScreenState extends State<JoinEventScreen>
                         controller: cameraController,
                         onDetect: (BarcodeCapture capture) async {
                           if (isScanned) return;
+                          isScanned = true;
+                          await cameraController.stop();
+                          final messenger = ScaffoldMessenger.of(context);
                           List<Barcode> barcodes = capture.barcodes;
                           if (barcodes.isNotEmpty &&
                               barcodes.first.rawValue != null) {
-                            isScanned = true;
                             setState(() {
                               qrResult = barcodes.first.rawValue!;
                             });
                             final uri = Uri.tryParse(qrResult);
                             if (uri != null && await canLaunchUrl(uri)) {
                               await launchUrl(uri);
+                              isScanned = false;
                             } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
+                              messenger.showSnackBar(
                                 const SnackBar(
                                   content: Text("Invalid QR Code"),
                                 ),
                               );
-                              isScanned = false;
                             }
                           }
+                          await Future.delayed(const Duration(seconds: 2));
+                          isScanned = false;
+                          await cameraController.start();
                         },
                       ),
                       AnimatedBuilder(
