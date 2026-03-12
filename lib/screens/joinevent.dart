@@ -73,8 +73,8 @@ class _JoinEventScreenState extends State<JoinEventScreen>
                         onDetect: (BarcodeCapture capture) async {
                           if (isScanned) return;
                           isScanned = true;
-                          await cameraController.stop();
                           final messenger = ScaffoldMessenger.of(context);
+                          await cameraController.stop();
                           List<Barcode> barcodes = capture.barcodes;
                           if (barcodes.isNotEmpty &&
                               barcodes.first.rawValue != null) {
