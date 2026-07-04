@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:dio/dio.dart';
 import 'package:amingo/services/auth_service.dart';
 import 'package:amingo/screens/event_details.dart';
@@ -73,7 +72,6 @@ class _JoinEventScreenState extends State<JoinEventScreen>
       final endTime = DateTime.parse(game["end_time"]);
       final String qrImage = game["qr_img"];
       final duration = endTime.difference(startTime).inMinutes;
-
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(

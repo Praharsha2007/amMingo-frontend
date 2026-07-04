@@ -259,7 +259,7 @@ class _EmailInputState extends State<HomeScreen> {
                         final authService = AuthService();
                         final token = await authService.signInWithGoogle();
                         if (token != null) {
-                          await AuthService.saveToken(token);
+                          await AuthService.saveToken(token);             
                           print("Got token: $token");
                           if (!context.mounted) return;
                           Navigator.push(
@@ -267,6 +267,7 @@ class _EmailInputState extends State<HomeScreen> {
                             MaterialPageRoute(
                               builder: (context) => const CreateUsername(),
                             ),
+                            
                           );
                         }
                       },

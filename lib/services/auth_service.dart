@@ -35,6 +35,7 @@ class AuthService {
   static Future<void> saveToken(String token) async {
     await _storage.write(key: "access_token", value: token);
   }
+
   Future<void> resendOtp(String email) async {
     await sendOtp(email);
   }
@@ -43,15 +44,13 @@ class AuthService {
       String email,
       String otp,
       ) async {
-    final response = await _dio.post(
+    return await _dio.post(
       "/login/verify-otp",
       data: {
         "email": email,
         "otp": otp,
       },
     );
-    print(response.headers.map);
-    return response;
   }
 
   Future<Response> joinGame(String code) async {
